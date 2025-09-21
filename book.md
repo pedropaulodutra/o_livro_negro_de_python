@@ -104,3 +104,32 @@ print(id(b))
 ```
 
 Ao executar, você verá que `a` e `b` possuem o mesmo ID, confirmando que ambas apontam para o mesmo objeto, economizando memória e aumentando a eficiência do Python.
+
+#### Números: Inteiros (`int`) e Ponto Flutuante (`float`).
+
+Em Python, números são objetos também, Eles têm tipo, valor e identidade, e são tratados de forma diferente dependendo do tipo.
+
+1. (`int`):
+
+   - Representam números inteiros, positivos ou negativos, **sem parte decimal**.
+   - Python 3 não possui limite fixo de tamanho para inteiros, apenas o limite de memória da máquina.
+     **Tudo é objeto**: Mesmo 1 ou 10 são objetos `int` armazenados na memória
+
+2. (`float`):
+   - Representam números decimais, usando ponto flutuante, que é uma aproximação em binário.
+   - Nem todos os números decimais podem ser representados exatamente devido à forma como os números de ponto flutuante são armazenados na memória (padrão [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)); por exemplo:
+   ```python
+   x = 0.1 + 0.2
+   print(x)     # 0.30000000000000004
+   ```
+
+Em Python, quando você soma um número inteiro com um número de ponto flutuante, o resultado sempre será um `float`. Isso acontece porque o Python aplica a chamada **conversão implícita de tipos**. Como `float` pode representar um conjunto mais amplo de valores, o interpretador converte automaticamente o inteiro para `float` antes de realizar a operação.
+
+```python
+a = 5
+b = 2.0
+
+c = a + b
+
+print(c, type(c))       # 7.0 <class 'float'>
+```

@@ -406,3 +406,39 @@ fruit = 'Melão'
 
 print(f'{fruit=!a:0>25}')
 ```
+
+#### Verdadeiro ou Falso? A Lógica Binária dos Booleanos (`bool`)
+
+Se na matemática já nos acostumamos com os números e suas infinitas combinações, no mundo da computação existe algo ainda mais essencial: o binário. Por trás de toda máquina, tudo é reduzido a dois estados possíveis: `ligado/desligado`, `1/0`, `verdadeiro/falso`. Em Python, esse conceito se materializa na classe `bool`. Há apenas dois valores possíveis: `True` e `False`. Apesar da simplicidade, os booleanos são a **espinha dorsal da lógica computacional**. Eles decidem se um programa segue por um caminho ou outro, se um laço continua rodando ou não, se uma condição é aceita ou rejeitada.
+
+O tipo `bool` é, na verdade, um subtipo de `int`. Isso significa que `True` é tratado internamente como 1 e `False` como 0:
+
+```python
+print(True + True)
+print(False + 10)
+```
+
+Essa característica abre espaço para truques criativos, mas também exige cuidado: afinal, como `bool` herda de `int`, valores booleanos podem se misturar a operações aritméticas sem levantar erros. Contudo, a verdadeira força dos booleanos não está apenas nessa herança matemática, mas sim na capacidade de decidir. São eles que determinam os fluxos de execução por meio das condições lógicas que veremos em profundidade mais à frente. Em Python, qualquer objeto pode ser avaliado como verdadeiro ou falso em um contexto lógico. Essa ideia é conhecida como truthiness (ou “valor de verdade” de um objeto). O interpretador, ao avaliar uma expressão, segue algumas regras:
+
+- Strings vazias são `False`
+- Listas vazias são `False`
+- Zero `int` e `float` são `False`
+- Qualquer valor não vazio é `True`
+
+Esse comportamento é tão fundamental que estruturas condicionais inteiras em Python dependem dele. O simples fato de um objeto "existir" ou estar "vazio" pode definir o caminho que o programa seguirá
+
+Mas como o interpretador decide isso internamente? A resposta está nos métodos especiais, os famosos _dunder methods_ que vimos há pouco.
+
+Dois dunders são fundamentais para essa lógica:
+
+1. `__bool__(self)`
+
+- Se definido, deve retornar explicitamente `True` ou `False`.
+- O interpretador chama esse método sempre que precisa saber o valor booleano de um objeto.
+
+2. `__len__(self)`
+
+- Caso `__bool__` não esteja definido, o Python procura por `__len__`.
+- O contrato é simples: se o comprimento retornado for 0, o objeto é considerado `False`; qualquer outro valor é `True`.
+
+Esse mecanismo explica por que coleções vazias (listas, dicionários, strings, tuplas, etc...) são avaliadas como `False`: elas implementam `__len__` e retornam 0 quando vazias.

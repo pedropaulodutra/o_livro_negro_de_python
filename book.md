@@ -133,3 +133,276 @@ c = a + b
 
 print(c, type(c))       # 7.0 <class 'float'>
 ```
+
+#### O Poder das Palavras: Manipulando Textos com Strings `(str)` e a Mágica das f-strings.
+
+Strings em Python são objetos da classe `str`, representando sequências imutáveis de caracteres. Embora possam parecer simples à primeira vista, escondem uma vasta gama de funcionalidades e métodos internos que tornam o trabalho com texto poderoso. A criação de strings pode ser feita de três formas principais: utilizando aspas simples `'Python'`, aspas duplas `"Python"`, ou ainda aspas triplas `'''` ou `"""`, estas permitem escrever strings multilinha, ideais para blocos de texto mais extensos:
+
+```python
+poem = """Python is simple,
+yet profound."""
+```
+
+O Python fornece dezenas de métodos prontos para manipular strings. Mesmo que ainda não tenhamos nos aprofundado no tema “métodos”, já podemos tirar proveito do que a linguagem nos oferece. Esses métodos são como ferramentas acopladas ao objeto string, prontas para realizar tarefas comuns sem que você precise reinventar a roda.
+
+- `upper()`, `lower()`: convertem todo o texto para maiúsculas ou minúsculas.
+- `strip()`: remove espaços extras no início e no fim da string.
+- `split()`: quebra o texto em partes, retornando uma lista.
+- `join()`: faz o oposto do `split()`, juntando elementos de uma lista com um separador.
+- `replace()`: substitui um trecho específico do texto por outro.
+
+```python
+text = '   Python is powerful!   '
+
+print(text.upper())     # '   PYTHON IS POWERFUL!   '
+print(text.strip())     # 'Python is powerful!'
+print(text.split())     # ['Python', 'is', 'powerful!']
+print(text.replace('powerful!', 'elegant!'))      # '   Python is elegant!   '
+```
+
+Como mencionado, existem dezenas de métodos e você pode consultá-los diretamente na [documentação](https://docs.python.org/3/library/stdtypes.html#string-methods).
+
+Um conceito que será explorado mais a fundo adiante é o _slicing_, mas já podemos introduzi-lo, pois as strings em Python são iteráveis e suportam **indexação** e **fatiamento**. Mas o que exatamente significa algo ser **iterável**? Um objeto iterável é aquele capaz de retornar seus elementos um a um. Tecnicamente, isso é possível porque ele implementa o método especial `__iter__()`, que retorna um iterador. Esse iterador, por sua vez, precisa implementar o método `__next__()`, que devolve o próximo elemento na sequência até não haver mais nada. Esses métodos são conhecidos como métodos **dunder** (_double underscore_), já que seus nomes começam e terminam com dois sublinhados. Isso dá ao objeto o “poder” de ser percorrido.
+
+Além de ser iterável, a string também suporta indexação, o que significa que podemos acessar caracteres diretamente pelo índice:
+
+```python
+text = 'Python'
+
+print(text[0])      # P
+print(text[1])      # y
+```
+
+Além da indexação tradicional (da esquerda para a direita), o Python também permite o uso de índices negativos, que informam ao interpretador que desejamos acessar os elementos de trás para frente. O índice `-1` representa o último caractere, `-2` o penúltimo, e assim por diante:
+
+```python
+text = 'Python'
+
+print(text[-1])     # n
+print(text[-6])     # P
+```
+
+Essa forma de indexação é muito útil quando não sabemos exatamente o tamanho da string, mas queremos acessar seus elementos a partir do final.
+
+Ótimo, agora que entendemos a indexação, podemos avançar para o slicing. O slicing é a técnica de pegar fatias de um iterável, utilizando os índices para definir o intervalo desejado.
+
+A sintaxe geral é (`sequencia[inicio:fim:passo]`).
+
+- Início: índice onde a fatia começa (inclusivo).
+- Fim: índice onde a fatia termina (exclusivo).
+- Passo: de quanto em quanto os índices avançam (valor padrão é 1).
+
+No exemplo abaixo, exibimos o texto sem a primeira e a última letra:
+
+```python
+text = 'Python'
+
+print(text[1:-1])       # ytho
+```
+
+Como você pode notar, em Python os índices começam em 0. Ou seja, o primeiro elemento de qualquer sequência está no índice 0, o segundo no índice 1 e assim por diante. Quando usamos slicing, o índice final é exclusivo. Isso significa que o elemento correspondente ao índice de fim não será incluído na fatia. Esse comportamento é intencional e tem várias vantagens. O principal motivo é que, ao começar a contagem do índice em 0, o comprimento de uma fatia pode ser calculado facilmente como `fim - início`.
+
+As `f-strings` foram introduzidas no Python 3.6, permitem interpolar variáveis e até expressões diretamente no texto, de forma clara e performática.
+
+```python
+name = 'Pedro'
+age = 24
+
+print(f'Hi, my name is {name} and I am {age} years old.')
+```
+
+Além disso, as f-strings suportam expressões completas dentro das chaves `{}`, permitindo realizar cálculos ou chamadas de funções diretamente na string:
+
+```python
+print(f'The double of 1726 is {1726 * 2}')
+```
+
+No exemplo acima, o operador `*` representa multiplicação. Mesmo que ainda não tenhamos explorado operações matemáticas em detalhes, você já pode ver como Python permite calcular valores dentro da própria string, tornando o código mais limpo e direto.
+
+Para usuários recentes de Python, f-strings já são consideradas o padrão, por serem claras, concisas e performáticas. No entanto, existem outras formas de formatar strings que você pode encontrar em códigos legados ou em tutoriais antigos:
+
+1. Interpolação com `%`
+
+   - Método clássico herdado do C. Usa placeholders como `%s` para string, `%d` para inteiros e `%f` para números de ponto flutuante e substitui pelos valores correspondentes:
+
+   ```python
+   name = 'Pedro'
+   surname = 'Dutra'
+   age = 24
+
+   print('%s %s, %d years old.' % (name, surname, age))
+   ```
+
+   - Hoje, esse método é considerado legado e raramente usado em códigos modernos.
+
+   - Aprendê-lo não é essencial, mas é útil para compreender códigos antigos ou tutoriais herdados de versões mais antigas do Python.
+
+2. Método `.format()`
+
+   - Introduzido no Python 2.6/3.0, mais moderno que `%`.
+   - Usa chaves `{}` como placeholders e substitui pelos valores passados:
+
+   ```python
+   name = 'Pedro'
+   surname = 'Dutra'
+   age = 24
+
+   print('{} {}, {} years old.'.format(name, surname, age))
+   ```
+
+Embora as `f-strings` sejam o padrão moderno, o método `.format()` ainda possui vantagens em situações específicas, especialmente quando precisamos reutilizar templates de texto:
+
+```python
+template = 'Hello {customer}, your order #{order_id} of {product} will be delivered on {date}'
+
+order1 = template.format(
+    customer='Pedro',
+    order_id=1024,
+    product='Python Book',
+    date='Sep 25'
+)
+
+order2 = template.format(
+    customer='Kathleen',
+    order_id=1025,
+    product='SmartPhone',
+    date='Sep 27'
+)
+
+print(order1)       # Hello Pedro, your order #1024 of Python Book will be delivered on Sep 25.
+
+print(order2)       # Hello Kathleen, your order #1025 of SmartPhone will be delivered on Sep 27.
+```
+
+Isso facilita a manutenção do código, evita repetição e funciona bem para mensagens padrão, relatórios ou templates que mudam dinamicamente.
+
+Note que, para usar esses templates, introduzimos algo novo: dentro da função `.format()`, usamos argumentos nomeados. Cada argumento corresponde a um placeholder no template; por exemplo, `{customer}` será substituído pelo valor passado para `customer=...`. Isso torna o código mais legível e menos propenso a erros, pois não é necessário se preocupar com a ordem dos valores. Mais adiante, quando falarmos sobre funções, parâmetros e argumentos, você verá que o conceito de argumentos nomeados é exatamente o mesmo, o que deixa o aprendizado mais consistente e intuitivo.
+
+O Python permite controlar como valores são exibidos em strings usando especificadores de formatação, definidos da [PEP 3101](https://peps.python.org/pep-3101/), A sintaxe geral é `[[fill]align][sign][#][0][minimumwidth][.precision][type]`. Cada parte tem uma função específica e pode ser combinada. Vamos explorar cada componente com exemplos práticos que podem ser rodados imediatamente.
+
+1. Alinhamento e preenchimento: `[fill]` e `[align]`
+
+   - fill: caractere usado para preencher o espaço restante.
+   - align: `<` esquerda, `>` direita, `^` centralizado,
+
+   ```python
+   text = 'Python'
+
+   print(f'{text:*<10}')       # 'Python****'
+   print(f'{text:->10}')       # '----Python'
+   print(f'{text:+^10}')       # '++Python++'
+   ```
+
+2. Sinal: `[sign]`
+
+   - Define como exibir sinais em números:
+     - `+`: sempre mostra sinal.
+     - `-`: mostra apenas se negativo (padrão).
+     - ` `: espaço para positivos.
+
+   ```python
+   x = 42
+   y = -42
+
+   print(f'{x:+}')     # '+42'
+   print(f'{y:+}')     # '-42'
+   print(f'{x: }')     # ' 42'
+   ```
+
+3. Prefixos alternativos: `#`
+
+   - Útil para bases diferentes (binário, octal, hexadecimal)
+
+   ```python
+   number = 255
+
+   print(f'{number:#b}')        # '0b11111111'
+   print(f'{number:#o}')        # '0o377'
+   print(f'{number:#x}')        # '0xff'
+   ```
+
+4. Preenchimento com zeros: `0`
+
+   - Preenche espaços à esquerda com zeros, normalmente usado com números
+
+   ```python
+   number = 42
+
+   print(f'{number:05}')       # '00042'
+   ```
+
+5. Largura mínima: `[minimumwidth]`
+
+   - Garante que a string final tenha pelo menos X caracteres, combinado com alinhamento e preenchimento.
+
+   ```python
+   text = 'Hi'
+
+   print(f'{text:>5}')     # '   Hi'
+   ```
+
+6. Precisão: `[.precision]`
+
+   - Para números de ponto flutuante, define o número de casas decimais.
+
+   ```python
+   pi = 3.14159
+
+   print(f'{pi:.2f}')      # '3.14'
+   ```
+
+7. Tipo: `[type]`
+
+   - Define como o valor será interpretado a exibido:
+     - `s`: string
+     - `d`: inteiro decimal
+     - `b`: binário
+     - `o`: octal
+     - `x` / `X`: hexadecimal
+     - `f`: ponto flutuante
+     - `%`: porcentagem
+
+   ```python
+   number = 255
+
+   print(f'{number:#0>10X}')       # '0X000000FF'
+   ```
+
+   - Explicação:
+     - `#`: prefixo hexadecimal
+     - `0`: preenchimento com zeros
+     - `>`: alinhamento à direita
+     - `10`: largura mínima
+     - `X`: formato hexadecimal
+
+Até agora, exploramos principalmente o lado direito da formatação, que começa após os dois pontos `:`. É nesse lado que definimos **como** o valor será exibido, controlando preenchimento, alinhamento, sinal, largura, precisão e tipo. No entanto, Python também permite controlar o lado esquerdo da formatação, antes do `:`. Esse lado lida com **conversões e depuração**, adicionando ainda mais poder e flixibilidade às f-strings.
+
+Em Python, é possível aplicar conversões antes da formatação de uma variável. Para isso, utilizamos os operadores `!s`, `!r` e `!a`. Cada um deles chama um método interno do objeto, permitindo controlar como o valor será representado como string.
+
+- `!s`: chama o método especial `__str__()`, exibindo o valor de forma amigável e legível.
+- `!r`: chama o método especial `__repr__()`, mostrando a representação oficial do objeto, útil para debug.
+- `!a`: chama o método especial `__ascii__()`, convertendo caracteres não ASCII em sequências de escape `\x` ou `\u`, garantindo que a string seja compatível com ASCII.
+
+```python
+fruit = 'Melão'
+
+print(f'{fruit!s}')     # Melão
+print(f'{fruit!r}')     # 'Melão'
+print(f'{fruit!a}')     # 'Mel\xe3o'
+```
+
+Além das conversões (`!s`, `!r`, `!a`), Python permite usar o sinal de atribuição `=` no lado esquerdo da f-string. Isso faz com que o nome da variável seja exibido junto com seu valor, o que é extremamente útil para debug e legibilidade.
+
+```python
+name = 'Pedro'
+
+print(f'{name=}')       # name='Pedro'
+```
+
+Podemos unir tudo que aprendemos em uma única f-string poderosa (e confusa):
+
+```python
+fruit = 'Melão'
+
+print(f'{fruit=!a:0>25}')       # fruit=000000000000000'Mel\xe3o'
+```

@@ -120,7 +120,7 @@ Em Python, números são objetos também, Eles têm tipo, valor e identidade, e 
    - Nem todos os números decimais podem ser representados exatamente devido à forma como os números de ponto flutuante são armazenados na memória (padrão [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)); por exemplo:
    ```python
    x = 0.1 + 0.2
-   print(x)     # 0.30000000000000004
+   print(x)
    ```
 
 Em Python, quando você soma um número inteiro com um número de ponto flutuante, o resultado sempre será um `float`. Isso acontece porque o Python aplica a chamada **conversão implícita de tipos**. Como `float` pode representar um conjunto mais amplo de valores, o interpretador converte automaticamente o inteiro para `float` antes de realizar a operação.
@@ -131,7 +131,7 @@ b = 2.0
 
 c = a + b
 
-print(c, type(c))       # 7.0 <class 'float'>
+print(c, type(c))
 ```
 
 #### O Poder das Palavras: Manipulando Textos com Strings `(str)` e a Mágica das f-strings.
@@ -154,10 +154,10 @@ O Python fornece dezenas de métodos prontos para manipular strings. Mesmo que a
 ```python
 text = '   Python is powerful!   '
 
-print(text.upper())     # '   PYTHON IS POWERFUL!   '
-print(text.strip())     # 'Python is powerful!'
-print(text.split())     # ['Python', 'is', 'powerful!']
-print(text.replace('powerful!', 'elegant!'))      # '   Python is elegant!   '
+print(text.upper())
+print(text.strip())
+print(text.split())
+print(text.replace('powerful!', 'elegant!'))
 ```
 
 Como mencionado, existem dezenas de métodos e você pode consultá-los diretamente na [documentação](https://docs.python.org/3/library/stdtypes.html#string-methods).
@@ -169,8 +169,8 @@ Além de ser iterável, a string também suporta indexação, o que significa qu
 ```python
 text = 'Python'
 
-print(text[0])      # P
-print(text[1])      # y
+print(text[0])
+print(text[1])
 ```
 
 Além da indexação tradicional (da esquerda para a direita), o Python também permite o uso de índices negativos, que informam ao interpretador que desejamos acessar os elementos de trás para frente. O índice `-1` representa o último caractere, `-2` o penúltimo, e assim por diante:
@@ -178,8 +178,8 @@ Além da indexação tradicional (da esquerda para a direita), o Python também 
 ```python
 text = 'Python'
 
-print(text[-1])     # n
-print(text[-6])     # P
+print(text[-1])
+print(text[-6])
 ```
 
 Essa forma de indexação é muito útil quando não sabemos exatamente o tamanho da string, mas queremos acessar seus elementos a partir do final.
@@ -197,7 +197,7 @@ No exemplo abaixo, exibimos o texto sem a primeira e a última letra:
 ```python
 text = 'Python'
 
-print(text[1:-1])       # ytho
+print(text[1:-1])
 ```
 
 Como você pode notar, em Python os índices começam em 0. Ou seja, o primeiro elemento de qualquer sequência está no índice 0, o segundo no índice 1 e assim por diante. Quando usamos slicing, o índice final é exclusivo. Isso significa que o elemento correspondente ao índice de fim não será incluído na fatia. Esse comportamento é intencional e tem várias vantagens. O principal motivo é que, ao começar a contagem do índice em 0, o comprimento de uma fatia pode ser calculado facilmente como `fim - início`.
@@ -269,9 +269,9 @@ order2 = template.format(
     date='Sep 27'
 )
 
-print(order1)       # Hello Pedro, your order #1024 of Python Book will be delivered on Sep 25.
+print(order1)
 
-print(order2)       # Hello Kathleen, your order #1025 of SmartPhone will be delivered on Sep 27.
+print(order2)
 ```
 
 Isso facilita a manutenção do código, evita repetição e funciona bem para mensagens padrão, relatórios ou templates que mudam dinamicamente.
@@ -288,9 +288,9 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    ```python
    text = 'Python'
 
-   print(f'{text:*<10}')       # 'Python****'
-   print(f'{text:->10}')       # '----Python'
-   print(f'{text:+^10}')       # '++Python++'
+   print(f'{text:*<10}')
+   print(f'{text:->10}')
+   print(f'{text:+^10}')
    ```
 
 2. Sinal: `[sign]`
@@ -304,9 +304,9 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    x = 42
    y = -42
 
-   print(f'{x:+}')     # '+42'
-   print(f'{y:+}')     # '-42'
-   print(f'{x: }')     # ' 42'
+   print(f'{x:+}')
+   print(f'{y:+}')
+   print(f'{x: }')
    ```
 
 3. Prefixos alternativos: `#`
@@ -316,9 +316,9 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    ```python
    number = 255
 
-   print(f'{number:#b}')        # '0b11111111'
-   print(f'{number:#o}')        # '0o377'
-   print(f'{number:#x}')        # '0xff'
+   print(f'{number:#b}')
+   print(f'{number:#o}')
+   print(f'{number:#x}')
    ```
 
 4. Preenchimento com zeros: `0`
@@ -328,7 +328,7 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    ```python
    number = 42
 
-   print(f'{number:05}')       # '00042'
+   print(f'{number:05}')
    ```
 
 5. Largura mínima: `[minimumwidth]`
@@ -338,7 +338,7 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    ```python
    text = 'Hi'
 
-   print(f'{text:>5}')     # '   Hi'
+   print(f'{text:>5}')
    ```
 
 6. Precisão: `[.precision]`
@@ -348,7 +348,7 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    ```python
    pi = 3.14159
 
-   print(f'{pi:.2f}')      # '3.14'
+   print(f'{pi:.2f}')
    ```
 
 7. Tipo: `[type]`
@@ -365,7 +365,7 @@ O Python permite controlar como valores são exibidos em strings usando especifi
    ```python
    number = 255
 
-   print(f'{number:#0>10X}')       # '0X000000FF'
+   print(f'{number:#0>10X}')
    ```
 
    - Explicação:
@@ -386,9 +386,9 @@ Em Python, é possível aplicar conversões antes da formatação de uma variáv
 ```python
 fruit = 'Melão'
 
-print(f'{fruit!s}')     # Melão
-print(f'{fruit!r}')     # 'Melão'
-print(f'{fruit!a}')     # 'Mel\xe3o'
+print(f'{fruit!s}')
+print(f'{fruit!r}')
+print(f'{fruit!a}')
 ```
 
 Além das conversões (`!s`, `!r`, `!a`), Python permite usar o sinal de atribuição `=` no lado esquerdo da f-string. Isso faz com que o nome da variável seja exibido junto com seu valor, o que é extremamente útil para debug e legibilidade.
@@ -396,7 +396,7 @@ Além das conversões (`!s`, `!r`, `!a`), Python permite usar o sinal de atribui
 ```python
 name = 'Pedro'
 
-print(f'{name=}')       # name='Pedro'
+print(f'{name=}')
 ```
 
 Podemos unir tudo que aprendemos em uma única f-string poderosa (e confusa):
@@ -404,5 +404,5 @@ Podemos unir tudo que aprendemos em uma única f-string poderosa (e confusa):
 ```python
 fruit = 'Melão'
 
-print(f'{fruit=!a:0>25}')       # fruit=000000000000000'Mel\xe3o'
+print(f'{fruit=!a:0>25}')
 ```
